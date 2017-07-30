@@ -10,13 +10,15 @@ function renderResult() {
 }
 
 
-function displaySearchResults() {
+function displaySearchResults(data) {
 	console.log('displaySearchResults() was called');
 
 	// call renderResult() for each relevant
 	// data item that should be rendered.
 	// Save this result to a variable.
 	renderResult();
+
+	console.log(data);
 
 	// Finally return the result variable
 	// so it can rendered in the HTML
@@ -25,17 +27,32 @@ function displaySearchResults() {
 	console.log('render all the results in HTML');
 }
 
-function getDataFromApi() {
+function getDataFromApi(searchTerm, callback) {
 	console.log('getDataFromApi() was called');
 
 	// using the search values,
 	// perform the ajax() or getJSON() request
 	// with the YouTube API key
 
-	// when get Data back from call the function
-	// that will render the results as HTML
+	// when get data back ajax() or getJSON(),
+	// ajax() or getJSON() will invoke the callback function
+	// e.g. getJSON(url, query, callback)
+	// the callback is displaySearchResults()
 
-	displaySearchResults();
+	// snippet contains the thumbnails
+	// items.snippet.thumbnails.medium.url
+
+
+	let query = {
+		part: 'snippet',
+		key: MY_API_KEY,
+		q: searchTerm,
+	};
+
+	// console.log(query)
+	// getJSON() or ajax() will call displaySearchResults();
+
+	$.getJSON(SEARCH_URL, query, callback);
 }
 
 
