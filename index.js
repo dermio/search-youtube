@@ -44,7 +44,7 @@ function getDataFromApi(searchTerm, callback) {
 
 
 	let query = {
-		part: 'snippet',
+		part: 'snippet', // part: 'snippet' required by YouTube data API
 		key: MY_API_KEY,
 		q: searchTerm,
 	};
