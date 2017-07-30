@@ -48,15 +48,16 @@ function watchSubmit() {
 		// to call another function that handles
 		// API request via getJSON() or ajax()
 
-		
-		getDataFromApi();
+		let queryTarget = $(this).find('.js-query');
+		let queryAnswer = queryTarget.val();
+		console.log(queryAnswer);
+		// clear out the queryTarget field
+		queryTarget.val('');
+
+		getDataFromApi(queryAnswer, displaySearchResults);
 	});
 }
 
 $(watchSubmit);
 
-
-////
-
-console.log(SEARCH_URL);
-console.log(MY_API_KEY);
+///////////////
