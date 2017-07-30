@@ -7,22 +7,30 @@ function renderResult() {
 
   // render each individual video with the
   // appropriate HTML markup
+  return
+  	 `<div>
+
+  		</div>`
 }
 
 
 function displaySearchResults(data) {
+	// the 'data' argument passed to displaySearchResults()
+	// is the JSON object returnd from .getJSON() or .ajax()
 	console.log('displaySearchResults() was called');
 
 	// call renderResult() for each relevant
 	// data item that should be rendered.
 	// Save this result to a variable.
-	renderResult();
 
-	console.log(data);
+	let results = data.items.map(function (elem, index) {
+		return renderResult();
+	});
 
 	// Finally return the result variable
 	// so it can rendered in the HTML
 	// in the results section.
+	$('.js-search-results').html(results);
 
 	console.log('render all the results in HTML');
 }
@@ -67,7 +75,8 @@ function watchSubmit() {
 
 		let queryTarget = $(this).find('.js-query');
 		let queryAnswer = queryTarget.val();
-		console.log(queryAnswer);
+		//console.log(queryAnswer);
+
 		// clear out the queryTarget field
 		queryTarget.val('');
 
