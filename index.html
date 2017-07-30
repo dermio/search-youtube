@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<meta name='viewport' content='width=device-width'>
+	<title>Thinkful Tube</title>
+	<link rel='stylesheet' type='text/css' href='main.css'>
+</head>
+<body>
+	<main role='main'>
+		<h1>Search YouTube videos</h1>
+		<form action='/url' method='post' id='searchForm'>
+			<label for='searchVid'></label>
+			<input type='text' name='searchVid' id='searchVid'>
+			<input type='submit' class='inputBtn' value="find YouTube">
+		</form>
+		<h2>Results</h2>
+
+		<div class='js-search-results'>
+			
+		</div>
+	</main>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src='index.js'></script>
+</body>
+</html>
