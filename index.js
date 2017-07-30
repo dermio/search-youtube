@@ -47,6 +47,8 @@ function watchSubmit() {
 		// use the data from the Form submission
 		// to call another function that handles
 		// API request via getJSON() or ajax()
+
+		
 		getDataFromApi();
 	});
 }
