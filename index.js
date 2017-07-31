@@ -1,28 +1,52 @@
 const SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
 const MY_API_KEY = 'AIzaSyDf9VtvE5wTSJyzYAfmWV6GJd_vzSa3r2w';
+const YOUTUBE_URL = 'https://www.youtube.com/watch?v=';
 
 
-function renderResult() {
+function renderResult(result) {
   console.log('renderResult() was called');
+
+  // the unique videoId for each result (the array item)
+  let videoId = result.id.videoId;
 
   // render each individual video with the
   // appropriate HTML markup
+  /*
+  return `<div>
+  					<p>${result.snippet.channelTitle}</p>
+  					<img src='${result.snippet.thumbnails.medium.url}' alt=''>
+  				</div>`; */
+
+  return `<div>
+  					<p>${result.snippet.channelTitle}</p>
+  					<a href='${YOUTUBE_URL}${videoId}' target='_blank'>
+  						<img src='${result.snippet.thumbnails.medium.url}' alt=''>
+  					</a>
+  				</div>`;
 }
 
 
 function displaySearchResults(data) {
+	// the 'data' argument passed to displaySearchResults()
+	// is the JSON object returnd from .getJSON() or .ajax()
 	console.log('displaySearchResults() was called');
 
 	// call renderResult() for each relevant
 	// data item that should be rendered.
 	// Save this result to a variable.
-	renderResult();
 
-	console.log(data);
+	// console.log(data.items); // data.items is an Array
+
+	let results = data.items.map(function (elem, index) {
+		return renderResult(elem);
+	}).join('');
+	// The join('') is not needed even though results is an Array.
+	// The HTML still renders fine without join('')
 
 	// Finally return the result variable
 	// so it can rendered in the HTML
 	// in the results section.
+	$('.js-search-results').html(results);
 
 	console.log('render all the results in HTML');
 }
@@ -47,6 +71,7 @@ function getDataFromApi(searchTerm, callback) {
 		part: 'snippet', // part: 'snippet' required by YouTube data API
 		key: MY_API_KEY,
 		q: searchTerm,
+		maxResults: 5
 	};
 
 	// console.log(query)
@@ -67,7 +92,8 @@ function watchSubmit() {
 
 		let queryTarget = $(this).find('.js-query');
 		let queryAnswer = queryTarget.val();
-		console.log(queryAnswer);
+		//console.log(queryAnswer);
+
 		// clear out the queryTarget field
 		queryTarget.val('');
 
