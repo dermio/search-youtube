@@ -1,16 +1,28 @@
 const SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
 const MY_API_KEY = 'AIzaSyDf9VtvE5wTSJyzYAfmWV6GJd_vzSa3r2w';
+const YOUTUBE_URL = 'https://www.youtube.com/watch?v=';
 
 
-function renderResult() {
+function renderResult(result) {
   console.log('renderResult() was called');
+
+  // the unique videoId for each result (the array item)
+  let videoId = result.id.videoId;
 
   // render each individual video with the
   // appropriate HTML markup
-  return
-  	 `<div>
+  /*
+  return `<div>
+  					<p>${result.snippet.channelTitle}</p>
+  					<img src='${result.snippet.thumbnails.medium.url}' alt=''>
+  				</div>`; */
 
-  		</div>`
+  return `<div>
+  					<p>${result.snippet.channelTitle}</p>
+  					<a href='${YOUTUBE_URL}${videoId}' target='_blank'>
+  						<img src='${result.snippet.thumbnails.medium.url}' alt=''>
+  					</a>
+  				</div>`;
 }
 
 
@@ -23,9 +35,13 @@ function displaySearchResults(data) {
 	// data item that should be rendered.
 	// Save this result to a variable.
 
+	// console.log(data.items); // data.items is an Array
+
 	let results = data.items.map(function (elem, index) {
-		return renderResult();
-	});
+		return renderResult(elem);
+	}).join('');
+	// The join('') is not needed even though results is an Array.
+	// The HTML still renders fine without join('')
 
 	// Finally return the result variable
 	// so it can rendered in the HTML
@@ -55,6 +71,7 @@ function getDataFromApi(searchTerm, callback) {
 		part: 'snippet', // part: 'snippet' required by YouTube data API
 		key: MY_API_KEY,
 		q: searchTerm,
+		maxResults: 5
 	};
 
 	// console.log(query)
