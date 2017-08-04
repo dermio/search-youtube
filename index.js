@@ -48,6 +48,9 @@ function displaySearchResults(data) {
 	// in the results section.
 	$('.js-search-results').html(results);
 
+	// unhide the .js-search-results once it has content
+	$('.js-search-results').prop('hidden', false);
+
 	console.log('render all the results in HTML');
 }
 
