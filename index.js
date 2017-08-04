@@ -20,7 +20,7 @@ function renderResult(result) {
   return `<div>
   					<p>${result.snippet.channelTitle}</p>
   					<a href='${YOUTUBE_URL}${videoId}' target='_blank'>
-  						<img src='${result.snippet.thumbnails.medium.url}' alt=''>
+  						<img src='${result.snippet.thumbnails.medium.url}' alt='vid'>
   					</a>
   				</div>`;
 }
